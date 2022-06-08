@@ -3,6 +3,7 @@ package com.example.restblog.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,14 +28,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and().httpBasic();
     }
+//    @Override
+//    @Bean
+//    protected UserDetailsService userDetailsService(){
+//        UserDetails mohammad = User.builder().username("mohammad").password(getPasswordEncoder().encode("password")).roles("USER").build();
+//
+//                UserDetails admin = User.builder().username("admin").password(getPasswordEncoder()
+//                .encode("admin")).roles("ADMIN").build();
+//        return new InMemoryUserDetailsManager(mohammad, admin);
+//    }
+
     @Override
     @Bean
-    protected UserDetailsService userDetailsService(){
-        UserDetails mohammad = User.builder().username("mohammad").password(getPasswordEncoder().encode("password")).roles("USER").build();
-
-                UserDetails admin = User.builder().username("admin").password(getPasswordEncoder()
-                .encode("admin")).roles("ADMIN").build();
-        return new InMemoryUserDetailsManager(mohammad, admin);
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean
