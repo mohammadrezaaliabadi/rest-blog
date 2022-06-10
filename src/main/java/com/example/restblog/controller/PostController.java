@@ -38,12 +38,12 @@ public class PostController {
     }
 
     // get post by id
-    @GetMapping(value = "/v1/posts/{id}")
+    @GetMapping(value = "/posts/{id}",params = "version=1")
     public ResponseEntity<PostDto> getPostByIdV1(@PathVariable(name = "id") long id) {
         return ResponseEntity.ok(postService.getPostById(id));
     }
 
-    @GetMapping(value = "/v2/posts/{id}")
+    @GetMapping(value = "/posts/{id}",params = "version=2")
     public ResponseEntity<PostDto2> getPostByIdV2(@PathVariable(name = "id") long id) {
         PostDto postById = postService.getPostById(id);
         PostDto2 postDto2 = new PostDto2();
